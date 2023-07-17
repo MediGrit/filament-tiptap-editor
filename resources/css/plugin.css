@@ -1,5 +1,7 @@
 @import './night-owl.css';
 
+@import '../../node_modules/katex/dist/katex.min.css';
+
 @tailwind utilities;
 
 .tiptap-wrapper.tiptap-fullscreen {

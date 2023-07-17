@@ -25,6 +25,7 @@ import Text from "@tiptap/extension-text";
 import TextStyle from "@tiptap/extension-text-style";
 import Underline from "@tiptap/extension-underline";
 import Highlight from "@tiptap/extension-highlight";
+import Mathematics from "@tiptap-pro/extension-mathematics";
 import {
     CheckedList,
     Lead,
@@ -132,7 +133,7 @@ document.addEventListener("alpine:init", () => {
                 return tool.id;
             })
 
-            let exts = [Document, Text, CustomParagraph, Dropcursor, Gapcursor, HardBreak, History];
+            let exts = [Document, Text, CustomParagraph, Dropcursor, Gapcursor, HardBreak, History, Mathematics];
 
             if (tools.length) {
 
