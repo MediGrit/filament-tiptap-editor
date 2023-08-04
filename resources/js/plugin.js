@@ -48,6 +48,7 @@ import {
     BubbleMenu,
     FloatingMenu,
     Video,
+    MathML
 } from "./extensions";
 import {lowlight} from "lowlight/lib/common";
 import {randomString} from "./utils";
@@ -92,6 +93,7 @@ let editorExtensions = {
     superscript: [Superscript],
     table: [Table.configure({resizable: true}), TableHeader, TableCell, TableRow],
     underline: [Underline],
+    html: [MathML]
 };
 
 const localeSwitcher = document.getElementById('activeLocale');
@@ -101,6 +103,12 @@ if (localeSwitcher) {
         localeSwitcher.dispatchEvent(localeChange);
     });
 }
+
+const mathematics = Mathematics.configure({
+    katexOptions: {
+        strict: false
+    }
+});
 
 document.addEventListener("alpine:init", () => {
     let editors = window.filamentTiptapEditors || {};
@@ -133,7 +141,7 @@ document.addEventListener("alpine:init", () => {
                 return tool.id;
             })
 
-            let exts = [Document, Text, CustomParagraph, Dropcursor, Gapcursor, HardBreak, History, Mathematics];
+            let exts = [Document, Text, CustomParagraph, Dropcursor, Gapcursor, HardBreak, History, mathematics];
 
             if (tools.length) {
 
@@ -423,6 +431,9 @@ document.addEventListener("alpine:init", () => {
                 })
                 .selectTextblockEnd()
                 .run();
+        },
+        insertHtml(html) {
+            this.editor().commands.insertContent(html);
         },
         insertSource(source) {
             this.editor().commands.setContent(source, {emitUpdate: true});
