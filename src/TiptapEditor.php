@@ -10,6 +10,7 @@ use Filament\Forms\Components\Contracts\CanBeLengthConstrained as CanBeLengthCon
 use Filament\Forms\Components\Field;
 use Filament\Support\Concerns\HasExtraAlpineAttributes;
 use FilamentTiptapEditor\Actions\GridBuilderAction;
+use FilamentTiptapEditor\Actions\HtmlAction;
 use FilamentTiptapEditor\Actions\OEmbedAction;
 use FilamentTiptapEditor\Actions\SourceAction;
 use FilamentTiptapEditor\Exceptions\InvalidOutputFormatException;
@@ -164,6 +165,16 @@ class TiptapEditor extends Field implements CanBeLengthConstrainedContract
                     $livewire->mountFormComponentAction($statePath, 'filament_tiptap_media');
                 },
             ],
+            'tiptap::insertHtml' => [
+                function (TiptapEditor $component, string $statePath, string $html): void {
+                    if ($component->isDisabled() || $statePath !== $component->getStatePath()) {
+                        return;
+                    }
+
+                    $livewire = $component->getLivewire();
+                    $livewire->mountFormComponentAction($statePath, 'filament_tiptap_html', ['html' => $html]);
+                },
+            ]
         ]);
 
         $this->registerActions(array_merge(
@@ -171,6 +182,7 @@ class TiptapEditor extends Field implements CanBeLengthConstrainedContract
                 SourceAction::make(),
                 OEmbedAction::make(),
                 GridBuilderAction::make(),
+                HtmlAction::make()
             ],
             [
                 config('filament-tiptap-editor.link_action')::make(),
