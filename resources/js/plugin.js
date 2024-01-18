@@ -105,6 +105,7 @@ if (localeSwitcher) {
 }
 
 const mathematics = Mathematics.configure({
+    regex: /`([^`]*)`/gi,
     katexOptions: {
         strict: false
     }
