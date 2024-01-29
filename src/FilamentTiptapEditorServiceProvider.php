@@ -56,6 +56,7 @@ class FilamentTiptapEditorServiceProvider extends PluginServiceProvider
     {
         return [
             'plugin-tiptap-editor-' . static::$version => __DIR__ . '/../resources/dist/filament-tiptap-editor.css',
+            'plugin-tiptap-editor-math-' . static::$version => 'https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css',
         ];
     }
 
