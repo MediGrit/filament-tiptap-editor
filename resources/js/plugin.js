@@ -18,7 +18,7 @@ import Strike from "@tiptap/extension-strike";
 import Subscript from "@tiptap/extension-subscript";
 import Superscript from "@tiptap/extension-superscript";
 import Table from "@tiptap/extension-table";
-import TableCell from "@tiptap/extension-table-cell";
+import BaseTableCell from "@tiptap/extension-table-cell";
 import TableHeader from "@tiptap/extension-table-header";
 import TableRow from "@tiptap/extension-table-row";
 import Text from "@tiptap/extension-text";
@@ -52,6 +52,25 @@ import {
 } from "./extensions";
 import {lowlight} from "lowlight/lib/common";
 import {randomString} from "./utils";
+
+const TableCell = BaseTableCell.extend({
+    addAttributes() {
+        return {
+            ...this.parent?.(),
+            backgroundColor: {
+                default: null,
+                parseHTML: element => {
+                    return element.style.backgroundColor;
+                },
+                renderHTML: attributes => {
+                    return {
+                        style: `background-color: ${attributes.backgroundColor}`,
+                    }
+                },
+            }
+        }
+    }
+});
 
 let editorExtensions = {
     blockquote: [Blockquote],
