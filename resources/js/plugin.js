@@ -321,6 +321,9 @@ document.addEventListener("alpine:init", () => {
             this.id = randomString(8);
             let _this = this;
             editors[this.id] = new Editor({
+                parseOptions: {
+                    preserveWhitespace: 'full',
+                },
                 element: this.$refs.element,
                 extensions: this.getExtensions(this.id),
                 editable: ! disabled,
