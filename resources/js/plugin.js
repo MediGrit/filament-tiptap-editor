@@ -292,7 +292,7 @@ document.addEventListener("alpine:init", () => {
             }
 
             this.$watch('state', (newState) => {
-                if (newState === '<p></p>' && newState !== this.editor().getHTML()) {
+                if ((newState === '<p></p>' || newState === '<hr><p></p>') && newState !== this.editor().getHTML()) {
                     editors[this.id].destroy();
                     this.initEditor(newState);
                 }
