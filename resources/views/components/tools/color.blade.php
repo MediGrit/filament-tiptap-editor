@@ -25,6 +25,24 @@
 
         <div class="w-full flex gap-2 mt-2">
             <x-filament-support::button
+                    x-on:click="editor().chain().focus().setColor('#00abdb').run(); $dispatch('close-panel')"
+                    size="sm"
+                    class="flex-1"
+            >
+                Blue
+            </x-filament-support::button>
+
+            <x-filament-support::button
+                    x-on:click="editor().chain().focus().setColor('#ffa630').run(); $dispatch('close-panel')"
+                    size="sm"
+                    class="flex-1"
+            >
+                Yellow
+            </x-filament-support::button>
+        </div>
+
+        <div class="w-full flex gap-2 mt-2">
+            <x-filament-support::button
                 x-on:click="editor().chain().focus().setColor(state).run(); $dispatch('close-panel')"
                 size="sm"
                 class="flex-1"
