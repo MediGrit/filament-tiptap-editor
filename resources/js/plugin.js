@@ -292,6 +292,11 @@ document.addEventListener("alpine:init", () => {
             }
 
             this.$watch('state', (newState) => {
+                if (newState === '<p></p>' && newState !== this.editor().getHTML()) {
+                    editors[this.id].destroy();
+                    this.initEditor(newState);
+                }
+
                 if (this.state !== newState) {
                     this.updateEditorContent(newState);
                 }
@@ -373,7 +378,10 @@ document.addEventListener("alpine:init", () => {
                 const src = media?.url || media?.src;
                 const imageTypes = ['jpg', 'jpeg', 'svg', 'png', 'webp'];
 
-                if (imageTypes.includes(src.split('.').pop())) {
+                const regex = /.*\.([a-zA-Z]*)\??/;
+                const match = regex.exec(src);
+
+                if (match !== null && imageTypes.includes(match[1])) {
                     this.editor()
                         .chain()
                         .focus()

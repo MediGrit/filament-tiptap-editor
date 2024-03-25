@@ -2,6 +2,36 @@
 
 All notable changes to `filament-tiptap-editor` will be documented in this file.
 
+## v2.6.8 - 2023-12-09
+
+### What's Changed
+
+* Fix: svg insert in media action by @awcodes in https://github.com/awcodes/filament-tiptap-editor/pull/246
+
+**Full Changelog**: https://github.com/awcodes/filament-tiptap-editor/compare/v2.6.7...v2.6.8
+
+## v2.6.7 - 2023-09-08
+
+### What's Changed
+
+- Fix: reset editor when create and create another action by @awcodes in https://github.com/awcodes/filament-tiptap-editor/pull/163
+
+**Full Changelog**: https://github.com/awcodes/filament-tiptap-editor/compare/v2.6.6...v2.6.7
+
+## v2.6.6 - 2023-09-07
+
+### What's Changed
+
+- Add modal information to standalone form instructions by @pboivin in https://github.com/awcodes/filament-tiptap-editor/pull/136
+- Added Brazilian Portuguese translations by @wisliy in https://github.com/awcodes/filament-tiptap-editor/pull/138
+- Find extension with regex to account for presigned by @Orrison in https://github.com/awcodes/filament-tiptap-editor/pull/159
+
+### New Contributors
+
+- @wisliy made their first contribution in https://github.com/awcodes/filament-tiptap-editor/pull/138
+
+**Full Changelog**: https://github.com/awcodes/filament-tiptap-editor/compare/v2.6.5...v2.6.6
+
 ## v2.6.5 - 2023-07-09
 
 ### What's Changed

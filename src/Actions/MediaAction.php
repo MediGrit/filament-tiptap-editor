@@ -89,8 +89,18 @@ class MediaAction extends Action
                             $filename = $filename . '-' . time();
                         }
 
-                        if (Str::contains($file->getMimeType(), 'image')) {
+                        if (
+                            Str::contains($file->getMimeType(), 'image')
+                            && ! Str::contains($file->getMimeType(), 'svg')
+                        ) {
+                            if (config('filesystems.disks.s3.driver') === 's3') {
+                                $image = Image::make($file->readStream());
+                            } else {
+                                $image = Image::make($file->getRealPath());
+                            }
 
+                            $set('width', $image->getWidth());
+                            $set('height', $image->getHeight());
                         }
 
                         $upload = $file->{$storeMethod}($component->getDirectory(), $filename . '.' . $file->getClientOriginalExtension(), $component->getDiskName());
@@ -107,12 +117,8 @@ class MediaAction extends Action
                     ->helperText(new HtmlString('<span class="text-xs"><a href="https://www.w3.org/WAI/tutorials/images/decision-tree" target="_blank" rel="noopener" class="underline text-primary-500 hover:text-primary-600 focus:text-primary-600">' . __('filament-tiptap-editor::media-modal.labels.alt_helper_text') . '</a></span>')),
                 TextInput::make('title')
                     ->label(__('filament-tiptap-editor::media-modal.labels.title')),
-                TextInput::make('width')
-                    ->helperText(new HtmlString('<span class="text-xs">The width in pixels (e.g. "100", or "auto")</span>'))
-                    ->visible(fn (callable $get) => $get('type') == 'image'),
-                TextInput::make('height')
-                    ->helperText(new HtmlString('<span class="text-xs">The width in pixels (e.g. "100", or "auto")</span>'))
-                    ->visible(fn (callable $get) => $get('type') == 'image'),
+                Hidden::make('width'),
+                Hidden::make('height'),
                 Hidden::make('type')
                     ->default('document'),
             ];
